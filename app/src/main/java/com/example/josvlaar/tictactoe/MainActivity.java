@@ -20,18 +20,21 @@ public class MainActivity extends AppCompatActivity {
 
         game = new Game();
 
-        for (int i=0; i < game.BOARD_SIZE; i++) {
-            for (int j=0; j < game.BOARD_SIZE; j++) {
-                Button button = (Button) findViewById(MainActivity.this.getResources()
-                        .getIdentifier("button" + i + "_" + j, "id", getBaseContext().getPackageName()));
-                Tile tile = game.getState(i, j);
-                switch(tile) {
-                    case CROSS:
-                        button.setText("X");
-                        break;
-                    case CIRCLE:
-                        button.setText("O");
-                        break;
+        if (savedInstanceState != null) {
+            game = (Game) savedInstanceState.getSerializable("game");
+            for (int i = 0; i < game.BOARD_SIZE; i++) {
+                for (int j = 0; j < game.BOARD_SIZE; j++) {
+                    Button button = (Button) findViewById(MainActivity.this.getResources()
+                            .getIdentifier("button" + i + "_" + j, "id", getBaseContext().getPackageName()));
+                    Tile tile = game.getState(i, j);
+                    switch (tile) {
+                        case CROSS:
+                            button.setText("X");
+                            break;
+                        case CIRCLE:
+                            button.setText("O");
+                            break;
+                    }
                 }
             }
         }
